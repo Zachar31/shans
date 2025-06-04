@@ -44,7 +44,7 @@
             gap: 12px;
         }
 
-        input, textarea {
+        input, textarea, select {
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -88,7 +88,7 @@
 <div class="container">
     <h1>ШансКредит — онлайн заявка</h1>
     <form id="credit-form">
-        <input type="text" name="name" placeholder="Ім'я та прізвище" required />
+        <input type="text" name="name" placeholder="Ім'я та прізвище" required autofocus />
         <input type="tel" name="phone" placeholder="Телефон" required />
         <input type="text" name="city" placeholder="Місто" required />
         <input type="number" name="amount" placeholder="Сума кредиту" required />
@@ -98,6 +98,30 @@
         <input type="text" name="passport" placeholder="Серія та номер паспорта" required />
         <input type="date" name="passport_date" placeholder="Дата видачі паспорта" required title="Дата видачі паспорта" />
         <input type="text" name="tax_id" placeholder="Ідентифікаційний код (ІПН)" required />
+
+        <label>Чи є судимість?</label>
+        <select name="criminal_record" required>
+            <option value="">Оберіть відповідь</option>
+            <option value="Так">Так</option>
+            <option value="Ні">Ні</option>
+        </select>
+
+        <label>Чи є діючі кредити?</label>
+        <select name="active_loans" required>
+            <option value="">Оберіть відповідь</option>
+            <option value="Так">Так</option>
+            <option value="Ні">Ні</option>
+        </select>
+
+        <input type="number" name="monthly_payment" placeholder="Сума на щомісячний платіж (грн)" required />
+
+        <label>Чи арештовані рахунки?</label>
+        <select name="accounts_frozen" required>
+            <option value="">Оберіть відповідь</option>
+            <option value="Так">Так</option>
+            <option value="Ні">Ні</option>
+        </select>
+
         <textarea name="comment" rows="4" placeholder="Коментар ( необов'язково )"></textarea>
         <button type="submit">Відправити заявку</button>
     </form>

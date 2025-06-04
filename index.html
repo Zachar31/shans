@@ -1,10 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ШансКредит</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("xFwYyiKcz3DVulVzm");
+        })();
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #0066cc;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        input, textarea {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #004f99;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div class="container">
+    <h1>ШансКредит — онлайн заявка</h1>
+    <form id="credit-form">
+        <input type="text" name="name" placeholder="Ім'я та прізвище" required />
+        <input type="tel" name="phone" placeholder="Телефон" required />
+        <input type="text" name="city" placeholder="Місто" required />
+        <input type="number" name="amount" placeholder="Сума кредиту" required />
+        <input type="text" name="term" placeholder="Бажаний строк" required />
+        <input type="text" name="income" placeholder="Дохід / Зайнятість" required />
+        <input type="email" name="email" placeholder="E-mail" required />
+        <input type="text" name="passport" placeholder="Серія та номер паспорта" required />
+        <input type="date" name="passport_date" placeholder="Дата видачі паспорта" required title="Дата видачі паспорта" />
+        <input type="text" name="tax_id" placeholder="Ідентифікаційний код (ІПН)" required />
+        <textarea name="comment" rows="4" placeholder="Коментар ( необов'язково )"></textarea>
+        <button type="submit">Відправити заявку</button>
+    </form>
+    <div class="success-message" id="success-message">
+        ✅ Заявку надіслано! Ми з вами зв'яжемось найближчим часом.
+    </div>
+    <div class="footer">© 2025 ШансКредит</div>
+</div>
+
+<script>
+    const form = document.getElementById("credit-form");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        emailjs.sendForm("service_ozen", "template_tzy51bm", form)
+            .then(() => {
+                form.reset();
+                successMessage.style.display = "block";
+            })
+            .catch(() => {
+                alert("❌ Помилка при надсиланні. Спробуйте пізніше.");
+            });
+    });
+</script>
 </body>
 </html>

@@ -80,9 +80,7 @@
     </style>
 </head>
 <body>
-<header>
-    ШансКредит — быстрые финансовые решения
-</header>
+<header>ШансКредит — быстрые финансовые решения</header>
 
 <div class="container">
     <h2>💰 Кредитный калькулятор</h2>
@@ -101,10 +99,6 @@
     </div>
 
     <button onclick="document.getElementById('form-block').scrollIntoView({ behavior: 'smooth' })">Оформить заявку</button>
-
-    <div style="margin-top: 20px; font-size: 14px;">
-        В случае просрочки возможно <strong>перекредитование</strong> или оплата только процентов с <strong>продлением срока</strong> действия договора.
-    </div>
 </div>
 
 <div class="container" id="form-block">
@@ -158,7 +152,6 @@
 
 <div class="footer">
     © 2025 ШансКредит<br>
-    Основано в 2023 году<br>
     Контакты: info@shanskredit.ru · +7 (900) 123-45-67
 </div>
 
@@ -183,6 +176,7 @@
         interest.textContent = percents;
         total.textContent = totalSum;
 
+        // заполняем скрытые поля
         document.getElementById("hiddenAmount").value = amount;
         document.getElementById("hiddenTerm").value = days;
         document.getElementById("hiddenBase").value = amount;
@@ -194,16 +188,18 @@
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-        calculate();
-        emailjs.sendForm("service_ozen", "template_tzy51bm", form)
-            .then(() => {
-                alert("✅ Заявка успешно отправлена!");
-                form.reset();
-                setTimeout(calculate, 100);
-            })
-            .catch(() => {
-                alert("❌ Ошибка при отправке. Попробуйте позже.");
-            });
+        calculate(); // обязательно перед отправкой
+        setTimeout(() => {
+            emailjs.sendForm("service_ozen", "template_tzy51bm", form)
+                .then(() => {
+                    alert("✅ Заявка успешно отправлена!");
+                    form.reset();
+                    setTimeout(calculate, 100);
+                })
+                .catch(() => {
+                    alert("❌ Ошибка при отправке. Попробуйте позже.");
+                });
+        }, 100);
     });
 </script>
 

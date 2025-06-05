@@ -1,58 +1,55 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ШансКредит</title>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function () {
-            emailjs.init("xFwYyiKcz3DVulVzm");
-        })();
-    </script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f1f5f9;
+            background: #f5f8fb;
             color: #111;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
         }
-
+        header {
+            background: #0066cc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
         .container {
-            width: 100%;
-            max-width: 500px;
+            max-width: 600px;
+            margin: 40px auto;
             background: white;
             border-radius: 16px;
             padding: 24px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
-
-        h1 {
-            text-align: center;
-            font-size: 26px;
-            margin-bottom: 16px;
+        h2 {
             color: #0066cc;
+            text-align: center;
         }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        input, textarea, select {
+        input, select, textarea {
+            width: 100%;
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
         }
-
-        button {
+        .result-box {
+            background: #e6f0ff;
             padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 14px;
+            width: 100%;
             background: #0066cc;
             color: white;
             border: none;
@@ -60,93 +57,161 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
             background: #004f99;
         }
-
         .footer {
-            margin-top: 20px;
             text-align: center;
             font-size: 14px;
-            color: #888;
+            color: #666;
+            margin-top: 40px;
+            padding-bottom: 20px;
         }
-
-        .success-message {
-            display: none;
-            margin-top: 16px;
-            padding: 12px;
-            background: #d1e7dd;
-            color: #0f5132;
-            border: 1px solid #badbcc;
-            border-radius: 8px;
-            text-align: center;
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 16px;
+            }
+            header {
+                font-size: 22px;
+                padding: 16px;
+            }
         }
     </style>
 </head>
 <body>
+<header>
+    ШансКредит — быстрые финансовые решения
+</header>
+
 <div class="container">
-    <h1>ШансКредит — онлайн заявка</h1>
-    <form id="credit-form">
-        <input type="text" name="name" placeholder="Ім'я та прізвище" required autofocus />
-        <input type="tel" name="phone" placeholder="Телефон" required />
-        <input type="text" name="city" placeholder="Місто" required />
-        <input type="number" name="amount" placeholder="Сума кредиту" required />
-        <input type="text" name="term" placeholder="Бажаний строк" required />
-        <input type="text" name="income" placeholder="Дохід / Зайнятість" required />
-        <input type="email" name="email" placeholder="E-mail" required />
-        <input type="text" name="passport" placeholder="Серія та номер паспорта" required />
-        <input type="date" name="passport_date" placeholder="Дата видачі паспорта" required title="Дата видачі паспорта" />
-        <input type="text" name="tax_id" placeholder="Ідентифікаційний код (ІПН)" required />
+    <h2>💰 Кредитный калькулятор</h2>
+    <label>Сумма кредита (до 300 000 ₽):</label>
+    <input type="range" id="amount" min="1000" max="300000" step="1000" value="10000" oninput="calculate()">
+    <div>Сумма: <span id="amountVal">10000</span> ₽</div>
 
-        <label>Чи є судимість?</label>
-        <select name="criminal_record" required>
-            <option value="">Оберіть відповідь</option>
-            <option value="Так">Так</option>
-            <option value="Ні">Ні</option>
-        </select>
+    <label>Срок кредита (до 61 дня):</label>
+    <input type="range" id="days" min="1" max="61" step="1" value="30" oninput="calculate()">
+    <div>Срок: <span id="daysVal">30</span> дней</div>
 
-        <label>Чи є діючі кредити?</label>
-        <select name="active_loans" required>
-            <option value="">Оберіть відповідь</option>
-            <option value="Так">Так</option>
-            <option value="Ні">Ні</option>
-        </select>
-
-        <input type="number" name="monthly_payment" placeholder="Сума на щомісячний платіж (грн)" required />
-
-        <label>Чи арештовані рахунки?</label>
-        <select name="accounts_frozen" required>
-            <option value="">Оберіть відповідь</option>
-            <option value="Так">Так</option>
-            <option value="Ні">Ні</option>
-        </select>
-
-        <textarea name="comment" rows="4" placeholder="Коментар ( необов'язково )"></textarea>
-        <button type="submit">Відправити заявку</button>
-    </form>
-    <div class="success-message" id="success-message">
-        ✅ Заявку надіслано! Ми з вами зв'яжемось найближчим часом.
+    <div class="result-box">
+        <p>Основная сумма: <strong><span id="base">10000</span> ₽</strong></p>
+        <p>Проценты: <strong><span id="interest">600</span> ₽</strong></p>
+        <p>К оплате: <strong><span id="total">10600</span> ₽</strong></p>
     </div>
-    <div class="footer">© 2013 ШансКредит</div>
+
+    <button onclick="document.getElementById('form-block').scrollIntoView({ behavior: 'smooth' })">Оформить заявку</button>
+
+    <div style="margin-top: 20px; font-size: 14px;">
+        В случае просрочки возможно <strong>перекредитование</strong> или оплата только процентов с <strong>продлением срока</strong> действия договора.
+    </div>
+</div>
+
+<div class="container" id="form-block">
+    <h2>📨 Заявка на кредит</h2>
+    <form id="credit-form">
+        <input type="text" name="lastname" placeholder="Фамилия" required />
+        <input type="text" name="firstname" placeholder="Имя" required />
+        <input type="text" name="middlename" placeholder="Отчество" required />
+        <input type="text" name="snils" placeholder="СНИЛС (XXX-XXX-XXX XX)" required />
+        <input type="tel" name="phone" placeholder="Телефон" required />
+        <input type="text" name="city" placeholder="Город" required />
+        <input type="text" name="income" placeholder="Доход / Занятость" required />
+        <input type="email" name="email" placeholder="E-mail" required />
+        <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
+        <input type="date" name="passport_date" title="Дата выдачи паспорта" required />
+        <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
+
+        <label>Есть ли судимость?</label>
+        <select name="criminal_record" required>
+            <option value="">Выберите ответ</option>
+            <option value="Да">Да</option>
+            <option value="Нет">Нет</option>
+        </select>
+
+        <label>Есть ли действующие кредиты?</label>
+        <select name="active_loans" required>
+            <option value="">Выберите ответ</option>
+            <option value="Да">Да</option>
+            <option value="Нет">Нет</option>
+        </select>
+
+        <label>Арестованы ли счета?</label>
+        <select name="accounts_frozen" required>
+            <option value="">Выберите ответ</option>
+            <option value="Да">Да</option>
+            <option value="Нет">Нет</option>
+        </select>
+
+        <textarea name="comment" rows="4" placeholder="Комментарий (необязательно)"></textarea>
+
+        <!-- скрытые поля -->
+        <input type="hidden" name="amount" id="hiddenAmount" />
+        <input type="hidden" name="term" id="hiddenTerm" />
+        <input type="hidden" name="base" id="hiddenBase" />
+        <input type="hidden" name="interest" id="hiddenInterest" />
+        <input type="hidden" name="total" id="hiddenTotal" />
+
+        <button type="submit">Отправить заявку</button>
+    </form>
+</div>
+
+<div class="footer">
+    © 2025 ШансКредит<br>
+    Основано в 2023 году<br>
+    Контакты: info@shanskredit.ru · +7 (900) 123-45-67
 </div>
 
 <script>
     const form = document.getElementById("credit-form");
-    const successMessage = document.getElementById("success-message");
+    const amountVal = document.getElementById("amountVal");
+    const daysVal = document.getElementById("daysVal");
+    const base = document.getElementById("base");
+    const interest = document.getElementById("interest");
+    const total = document.getElementById("total");
+
+    function calculate() {
+        const amount = +document.getElementById("amount").value;
+        const days = +document.getElementById("days").value;
+        const ratePerDay = 0.002;
+        const percents = Math.round(amount * ratePerDay * days);
+        const totalSum = amount + percents;
+
+        amountVal.textContent = amount;
+        daysVal.textContent = days;
+        base.textContent = amount;
+        interest.textContent = percents;
+        total.textContent = totalSum;
+
+        document.getElementById("hiddenAmount").value = amount;
+        document.getElementById("hiddenTerm").value = days;
+        document.getElementById("hiddenBase").value = amount;
+        document.getElementById("hiddenInterest").value = percents;
+        document.getElementById("hiddenTotal").value = totalSum;
+    }
+
+    window.onload = calculate;
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-
+        calculate();
         emailjs.sendForm("service_ozen", "template_tzy51bm", form)
             .then(() => {
+                alert("✅ Заявка успешно отправлена!");
                 form.reset();
-                successMessage.style.display = "block";
+                setTimeout(calculate, 100);
             })
             .catch(() => {
-                alert("❌ Помилка при надсиланні. Спробуйте пізніше.");
+                alert("❌ Ошибка при отправке. Попробуйте позже.");
             });
     });
+</script>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function () {
+        emailjs.init("xFwYyiKcz3DVulVzm");
+    })();
 </script>
 </body>
 </html>

@@ -67,6 +67,39 @@
             margin-top: 40px;
             padding-bottom: 20px;
         }
+
+        #toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            z-index: 9999;
+            animation: fadeInSlideDown 0.5s ease-out;
+        }
+        #toast span {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInSlideDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
         @media (max-width: 600px) {
             .container {
                 margin: 20px;
@@ -140,7 +173,6 @@
 
         <textarea name="comment" rows="4" placeholder="Комментарий (необязательно)"></textarea>
 
-        <!-- скрытые поля -->
         <input type="hidden" name="amount" id="hiddenAmount" />
         <input type="hidden" name="term" id="hiddenTerm" />
         <input type="hidden" name="base" id="hiddenBase" />
@@ -151,19 +183,23 @@
     </form>
 </div>
 
-<div class="footer">
-    © 2025 ШансКредит<br>
-    Контакты: shanscredit@mail.ru
-     +7 (900) 123-45-67
+<div id="toast">
+    ✅ Ваша заявка отправлена! Мы свяжемся с вами в течение часа.<br />
+    💳 В случае одобрения необходимо будет предоставить банковскую карту, оформленную на ваше имя.
+    <span onclick="document.getElementById('toast').style.display='none'">✖</span>
 </div>
 
+<div class="footer">
+    © 2025 ШансКредит<br>
+    Контакты: shanscredit@mail.ru · +7 (900) 123-45-67
+</div>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
+    emailjs.init("xFwYyiKcz3DVulVzm");
+
     const form = document.getElementById("credit-form");
-    const amountVal = document.getElementById("amountVal");
-    const daysVal = document.getElementById("daysVal");
-    const base = document.getElementById("base");
-    const interest = document.getElementById("interest");
-    const total = document.getElementById("total");
+    const toast = document.getElementById("toast");
 
     function calculate() {
         const amount = +document.getElementById("amount").value;
@@ -172,13 +208,12 @@
         const percents = Math.round(amount * ratePerDay * days);
         const totalSum = amount + percents;
 
-        amountVal.textContent = amount;
-        daysVal.textContent = days;
-        base.textContent = amount;
-        interest.textContent = percents;
-        total.textContent = totalSum;
+        document.getElementById("amountVal").textContent = amount;
+        document.getElementById("daysVal").textContent = days;
+        document.getElementById("base").textContent = amount;
+        document.getElementById("interest").textContent = percents;
+        document.getElementById("total").textContent = totalSum;
 
-        // заполняем скрытые поля
         document.getElementById("hiddenAmount").value = amount;
         document.getElementById("hiddenTerm").value = days;
         document.getElementById("hiddenBase").value = amount;
@@ -190,26 +225,18 @@
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-        calculate(); // обязательно перед отправкой
-        setTimeout(() => {
-            emailjs.sendForm("service_ozen", "template_tzy51bm", form)
-                .then(() => {
-                    alert("✅ Заявка успешно отправлена!");
-                    form.reset();
-                    setTimeout(calculate, 100);
-                })
-                .catch(() => {
-                    alert("❌ Ошибка при отправке. Попробуйте позже.");
-                });
-        }, 100);
+        calculate();
+        emailjs.sendForm("service_ozen", "template_tzy51bm", form)
+            .then(() => {
+                form.reset();
+                calculate();
+                toast.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            })
+            .catch(() => {
+                alert("❌ Ошибка при отправке. Попробуйте позже.");
+            });
     });
-</script>
-
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    (function () {
-        emailjs.init("xFwYyiKcz3DVulVzm");
-    })();
 </script>
 </body>
 </html>

@@ -4,6 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ШансКредит — онлайн заявка</title>
+
+    <meta name="description" content="Оформите онлайн-заявку на кредит до 300 000 ₽. Быстрое одобрение, перевод на карту, без визита в офис. Работает 24/7 по всей России." />
+    <meta name="keywords" content="онлайн кредит, заявка на кредит, быстрый займ, деньги на карту, взять кредит, кредит без визита в банк, кредит в России" />
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://shanscredit.example.com/" />
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
+    <!-- Open Graph для соцсетей -->
+    <meta property="og:title" content="ШансКредит — Кредит до 300 000 ₽ онлайн" />
+    <meta property="og:description" content="Получите деньги на карту — быстрое оформление, заявка без визита в офис. Работаем 24/7 по всей России." />
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" />
+    <meta property="og:url" content="https://shanscredit.example.com/" />
+    <meta property="og:type" content="website" />
+    <!-- Структурированные данные JSON-LD -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            "name": "ШансКредит",
+            "url": "https://shanscredit.example.com/",
+            "logo": "https://cdn-icons-png.flaticon.com/512/6942/6942962.png",
+            "description": "Онлайн-кредиты до 300 000 ₽ без визита в офис, заявка за 2 минуты. Перевод на карту. Работаем по всей России.",
+            "areaServed": "RU",
+            "openingHours": "Mo-Su 00:00-23:59",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+7-900-123-45-67",
+                "contactType": "customer support",
+                "areaServed": "RU",
+                "availableLanguage": ["Russian"]
+            }
+        }
+    </script>
+
     <meta name="description" content="Оформите онлайн-заявку на кредит до 300 000 ₽ под выгодный процент. Быстрое рассмотрение, без визита в офис!">
     <meta name="keywords" content="кредит, онлайн кредит, быстрый займ, деньги на карту, заявка на кредит">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
@@ -77,13 +110,15 @@
         <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
         <input type="date" name="passport_date" placeholder="Дата выдачи паспорта" required title="Дата выдачи паспорта" />
         <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
+<!--        <input type="text" name="snils" placeholder="СНИЛС (для суммы свыше 30 000)" required />-->
+
         <select name="criminal_record" required>
             <option value="">Есть ли судимость?</option>
             <option value="Да">Да</option>
             <option value="Нет">Нет</option>
         </select>
         <select name="active_loans" required>
-            <option value="">Есть ли кредиты?</option>
+            <option value="">Есть ли не сплаченные кредиты?</option>
             <option value="Да">Да</option>
             <option value="Нет">Нет</option>
         </select>

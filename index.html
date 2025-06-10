@@ -9,13 +9,11 @@
     <meta name="keywords" content="онлайн кредит, заявка на кредит, быстрый займ, деньги на карту, взять кредит, кредит без визита в банк, кредит в России" />
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://shans.vercel.app/" />
-    <!-- Open Graph для соцсетей -->
     <meta property="og:title" content="ШансКредит — Кредит до 300 000 ₽ онлайн" />
     <meta property="og:description" content="Получите деньги на карту — быстрое оформление, заявка без визита в офис. Работаем 24/7 по всей России." />
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" />
     <meta property="og:url" content="https://shans.vercel.app/" />
     <meta property="og:type" content="website" />
-    <!-- Структурированные данные JSON-LD -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -135,23 +133,6 @@
         <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
         <input type="date" name="passport_date" placeholder="Дата выдачи паспорта" required title="Дата выдачи паспорта" />
         <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
-<!--        <input type="text" name="snils" placeholder="СНИЛС (для суммы свыше 30 000)" required />-->
-
-<!--        <select name="criminal_record" required>-->
-<!--            <option value="">Есть ли судимость?</option>-->
-<!--            <option value="Да">Да</option>-->
-<!--            <option value="Нет">Нет</option>-->
-<!--        </select>-->
-<!--        <select name="active_loans" required>-->
-<!--            <option value="">Есть ли не сплаченные кредиты?</option>-->
-<!--            <option value="Да">Да</option>-->
-<!--            <option value="Нет">Нет</option>-->
-<!--        </select>-->
-<!--        <select name="accounts_frozen" required>-->
-<!--            <option value="">Арестованы ли счета?</option>-->
-<!--            <option value="Да">Да</option>-->
-<!--            <option value="Нет">Нет</option>-->
-<!--        </select>-->
         <textarea name="comment" rows="4" placeholder="Комментарий (необязательно, вы можите указать информацию которая поспособствует положительному результату)"></textarea>
         <input type="hidden" name="amount" id="hiddenAmount">
         <input type="hidden" name="term" id="hiddenTerm">
@@ -164,19 +145,13 @@
 
 <div class="container" id="reviews">
     <h2>Отзывы клиентов</h2>
-
-    <!-- Существующие отзывы -->
     <div id="review-list">
-        <!-- Сюда отзывы будут добавляться автоматически -->
     </div>
     <div id="pagination" style="text-align:center; margin-top: 20px;">
         <button id="prevPage" disabled>← Предыдущая</button>
         <span id="pageIndicator" style="margin: 0 10px;">1</span>
         <button id="nextPage">Следующая →</button>
     </div>
-
-
-    <!-- Форма добавления -->
     <form id="review-form" style="margin-top: 32px;">
         <label for="review-name">Ваше имя:</label>
         <input type="text" id="review-name" placeholder="Иван Иванов" required />
@@ -254,11 +229,12 @@
 
 <section class="container" style="margin-top: 48px;">
     <h2>О сервисе ШансКредит</h2>
-    <p>ШансКредит — это удобный онлайн-сервис для получения срочных кредитов на карту. Мы помогаем найти наиболее подходящее решение по вашему запросу, работая напрямую с проверенными партнёрами.</p>
-    <p>Заявки рассматриваются индивидуально, без визита в офис, круглосуточно. Вам не нужно собирать справки — всё, что требуется, уже в анкете.</p>
-    <p>Работаем по всей России. Поддержка доступна 24/7.</p>
-    <p>Связь: <a href="mailto:shanscredit@mail.ru">shanscredit@mail.ru</a> · Телефон: <a href="tel:+79001234567">+7 (900) 123-45-67</a></p>
+    <p><strong>ШансКредит</strong> — это частная услуга по предоставлению срочной финансовой помощи. Мы работаем напрямую с клиентами и рассматриваем каждую заявку индивидуально.</p>
+    <p>Кредиты предоставляются без посещения офиса — вся процедура проходит онлайн. Заявку можно подать в любое время суток, мы обрабатываем обращения вручную и свяжемся с вами в кратчайшие сроки.</p>
+    <p>Вы получаете решение напрямую от нас, без посредников, банков и МФО. В некоторых случаях для одобрения могут потребоваться дополнительные данные.</p>
+    <p>Работаем по всей России. Связь: <a href="mailto:shanscredit@mail.ru">shanscredit@mail.ru</a> · Телефон: <a href="tel:+79001234567">+7 (900) 123-45-67</a></p>
 </section>
+
 
 
 <section class="container" style="margin-top: 48px;">
@@ -316,145 +292,6 @@
             });
     });
 </script>
-
-<!--<script>-->
-<!--    document.getElementById("review-form").addEventListener("submit", function(e) {-->
-<!--        e.preventDefault();-->
-
-<!--        const name = document.getElementById("review-name").value.trim();-->
-<!--        const rating = document.getElementById("review-rating").value;-->
-<!--        const text = document.getElementById("review-text").value.trim();-->
-
-<!--        if (!name || !rating || !text) return;-->
-
-<!--        const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
-
-<!--        const reviewHTML = `-->
-<!--        <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
-<!--            <p><strong itemprop="author">${name}</strong> —-->
-<!--                <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
-<!--                    <span itemprop="ratingValue">${rating}</span> ${stars}-->
-<!--                </span>-->
-<!--            </p>-->
-<!--            <p itemprop="reviewBody">${text}</p>-->
-<!--        </div>-->
-<!--        `;-->
-
-<!--        document.getElementById("review-list").insertAdjacentHTML("beforeend", reviewHTML);-->
-
-<!--        // Очистка формы-->
-<!--        this.reset();-->
-<!--    });-->
-<!--</script>-->
-
-<!--<script>-->
-<!--    const predefinedReviews = [-->
-<!--        { name: "Анна ", rating: 5, text: "Очень довольна, всё быстро и удобно." },-->
-<!--        { name: "Сергей ", rating: 4, text: "Оформил без проблем, спасибо." },-->
-<!--        { name: "Наталья", rating: 5, text: "Получила деньги в тот же день!" },-->
-<!--        { name: "Олег ", rating: 3, text: "Всё хорошо, но ставка немного выше ожиданий." },-->
-<!--        { name: "Елена ", rating: 5, text: "Спасибо за понятную анкету и поддержку." },-->
-<!--        { name: "Артём ", rating: 4, text: "Удобный сервис, рекомендую!" },-->
-<!--        { name: "Alexandeк", rating: 3, text: "с первого раза был отказ, добавил СНИЛс и потом одобрили" },-->
-<!--        { name: "Юлия ", rating: 2, text: "Первый раз беру займ — пока что отказ." },-->
-<!--        { name: "Игорь ", rating: 4, text: "Ждал смс чуть дольше часа, но всё ок." },-->
-<!--        { name: "Марина ", rating: 5, text: "Одобрение за 10 минут! Просто супер!" },-->
-<!--        { name: "Василий ", rating: 4, text: "Нормально, деньги пришли вовремя." },-->
-<!--        { name: "Татьяна ", rating: 4, text: "ну...одобрили, теперь отдавать, что сказать))" },-->
-<!--        { name: "Андрей ", rating: 3, text: "Процесс затянулся, но в итоге получил деньги." },-->
-<!--        { name: "Ольга ", rating: 5, text: "одобрили с третьего раза большую сумму, добавляла на почту фото паспорта" },-->
-<!--        { name: "Роман ", rating: 4, text: "Не первый раз — всегда стабильно." },-->
-<!--        { name: "Кирилл ", rating: 5, text: "Без лишних вопросов, всё чётко." },-->
-<!--        { name: "Екатерина ", rating: 5, text: "Деньги пришли даже в выходной." },-->
-<!--        { name: "Максим ", rating: 2, text: "отказ" },-->
-<!--        { name: "Валентина ", rating: 5, text: "Рекомендую! Спасибо за помощь." },-->
-<!--        { name: "Владимир ", rating: 4, text: "Всё хорошо, но формы можно упростить." },-->
-<!--        { name: "Инна ", rating: 5, text: "Нужна была срочно сумма — выручили!" },-->
-<!--        { name: "Григорий ", rating: 4, text: "Понятный процесс, приятный интерфейс." },-->
-<!--        { name: "Людмила ", rating: 5, text: "Спасибо консультанту, всё разъяснил." },-->
-<!--        { name: "Денис ", rating: 4, text: "Быстрая подача заявки, без визита в офис." },-->
-<!--        { name: "Виктория ", rating: 5, text: "Проверенный сервис. Одобрено!" },-->
-<!--        { name: "Степан ", rating: 4, text: "Потребовались документы, но всё прошло." },-->
-<!--        { name: "Ксения ", rating: 5, text: "Порадовала скорость перевода." },-->
-<!--        { name: "Алексей ", rating: 5, text: "Всё онлайн, то что искал" },-->
-<!--        { name: "Жанна ", rating: 5, text: "Спасибо, выручили в трудную минуту." },-->
-<!--        { name: "Олеся ", rating: 5, text: "Буду рекомендовать друзьям." },-->
-<!--        { name: "Илья ", rating: 4, text: "Сайт работает стабильно, претензий нет." },-->
-<!--        { name: "Вероника ", rating: 5, text: "простой и удобный." }-->
-<!--    ];-->
-
-<!--    function renderReviews() {-->
-<!--        const container = document.getElementById("review-list");-->
-<!--        predefinedReviews.forEach(({ name, rating, text }) => {-->
-<!--            const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
-<!--            container.insertAdjacentHTML("beforeend", `-->
-<!--                <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
-<!--                    <p><strong itemprop="author">${name}</strong> —-->
-<!--                        <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
-<!--                            <span itemprop="ratingValue">${rating}</span> ${stars}-->
-<!--                        </span>-->
-<!--                    </p>-->
-<!--                    <p itemprop="reviewBody">${text}</p>-->
-<!--                </div>-->
-<!--            `);-->
-<!--        });-->
-<!--    }-->
-
-<!--    document.addEventListener("DOMContentLoaded", renderReviews);-->
-<!--</script>-->
-
-
-
-<!--<script>-->
-<!--    function saveReviewToLocalStorage(review) {-->
-<!--        const saved = JSON.parse(localStorage.getItem("userReviews") || "[]");-->
-<!--        saved.push(review);-->
-<!--        localStorage.setItem("userReviews", JSON.stringify(saved));-->
-<!--    }-->
-
-<!--    function renderUserReviews() {-->
-<!--        const saved = JSON.parse(localStorage.getItem("userReviews") || "[]");-->
-<!--        saved.forEach(({ name, rating, text }) => {-->
-<!--            const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);-->
-<!--            const html = `-->
-<!--            <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">-->
-<!--                <p><strong itemprop="author">${name}</strong> —-->
-<!--                    <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">-->
-<!--                        <span itemprop="ratingValue">${rating}</span> ${stars}-->
-<!--                    </span>-->
-<!--                </p>-->
-<!--                <p itemprop="reviewBody">${text}</p>-->
-<!--            </div>`;-->
-<!--            document.getElementById("review-list").insertAdjacentHTML("beforeend", html);-->
-<!--        });-->
-<!--    }-->
-
-<!--    // Переопредели submit обработчик формы, чтобы сохранять в localStorage:-->
-<!--    document.getElementById("review-form").addEventListener("submit", function (e) {-->
-<!--        e.preventDefault();-->
-
-<!--        const name = document.getElementById("review-name").value.trim();-->
-<!--        const rating = document.getElementById("review-rating").value;-->
-<!--        const text = document.getElementById("review-text").value.trim();-->
-
-<!--        if (!name || !rating || !text) return;-->
-
-<!--        saveReviewToLocalStorage({ name, rating, text });-->
-
-<!--        this.reset();-->
-
-<!--        // Очистить и перерисовать все отзывы-->
-<!--        document.getElementById("review-list").innerHTML = "";-->
-<!--        renderReviews();       // стандартные-->
-<!--        renderUserReviews();   // пользовательские-->
-<!--    });-->
-
-<!--    // При загрузке отрисовать ВСЁ-->
-<!--    document.addEventListener("DOMContentLoaded", () => {-->
-<!--        renderReviews();-->
-<!--        renderUserReviews();-->
-<!--    });-->
-<!--</script>-->
 
 <script>
     const predefinedReviews = [
@@ -570,7 +407,6 @@
     });
 </script>
 
-<!--Start of Tawk.to Script-->
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -582,7 +418,7 @@
         s0.parentNode.insertBefore(s1,s0);
     })();
 </script>
-<!--End of Tawk.to Script-->
+
 
 
 </body>

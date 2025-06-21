@@ -152,7 +152,10 @@
 
 <div class="container" id="reviews">
     <h2>Отзывы клиентов</h2>
-    <div id="review-list">
+    <div id="review-wrapper" itemscope itemtype="https://schema.org/Service">
+          <meta itemprop="name" content="ШансКредит">
+          <meta itemprop="url" content="https://shans.vercel.app/">
+          <div id="review-list"></div>
     </div>
     <div id="pagination" style="text-align:center; margin-top: 20px;">
         <button id="prevPage" disabled>← Предыдущая</button>
@@ -353,34 +356,47 @@
     }
 
     function renderCurrentPage() {
+        const wrapper   = document.getElementById("review-wrapper");
         const container = document.getElementById("review-list");
-        const pageIndicator = document.getElementById("pageIndicator");
-        const prevBtn = document.getElementById("prevPage");
-        const nextBtn = document.getElementById("nextPage");
+        const pageInd   = document.getElementById("pageIndicator");
+        const prevBtn   = document.getElementById("prevPage");
+        const nextBtn   = document.getElementById("nextPage");
 
-        const start = (currentPage - 1) * REVIEWS_PER_PAGE;
-        const end = start + REVIEWS_PER_PAGE;
+        const start      = (currentPage - 1) * REVIEWS_PER_PAGE;
+        const end        = start + REVIEWS_PER_PAGE;
         const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
 
+        // очищаем список
         container.innerHTML = "";
+
+        // выводим текущую страницу
         allReviews.slice(start, end).forEach(({ name, rating, text }) => {
             const stars = "⭐".repeat(rating) + "☆".repeat(5 - rating);
-            container.insertAdjacentHTML("beforeend", `
-                <div itemscope itemtype="https://schema.org/Review" style="margin-bottom: 24px;">
-                    <p><strong itemprop="author">${name}</strong> —
-                        <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-                            <span itemprop="ratingValue">${rating}</span> ${stars}
-                        </span>
-                    </p>
-                    <p itemprop="reviewBody">${text}</p>
-                </div>
-            `);
+
+            container.insertAdjacentHTML(
+                "beforeend",
+                `
+            <div itemprop="review" itemscope itemtype="https://schema.org/Review" style="margin-bottom:24px;">
+                <p>
+                    <strong itemprop="author">${name}</strong> —
+                    <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+                        <meta itemprop="worstRating" content="1">
+                        <meta itemprop="bestRating"  content="5">
+                        <span itemprop="ratingValue">${rating}</span> ${stars}
+                    </span>
+                </p>
+                <p itemprop="reviewBody">${text}</p>
+            </div>
+            `
+            );
         });
 
-        pageIndicator.textContent = `${currentPage} / ${totalPages}`;
-        prevBtn.disabled = currentPage === 1;
-        nextBtn.disabled = currentPage === totalPages;
+        // пагинация
+        pageInd.textContent          = `${currentPage} / ${totalPages}`;
+        prevBtn.disabled             = currentPage === 1;
+        nextBtn.disabled             = currentPage === totalPages;
     }
+
 
     function goToPage(offset) {
         const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
@@ -428,6 +444,8 @@
         s0.parentNode.insertBefore(s1,s0);
     })();
 </script>
+
+
 
 
 

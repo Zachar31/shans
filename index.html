@@ -124,27 +124,28 @@
 <div class="container" id="form">
     <h2>📨 Заполните анкету</h2>
     <form id="credit-form">
-        <input type="text" name="lastname" placeholder="Фамилия" required />
-        <input type="text" name="firstname" placeholder="Имя" required />
-        <input type="text" name="middlename" placeholder="Отчество" required />
-        <input type="tel" name="phone" placeholder="Телефон" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="text" name="city" placeholder="Город" required />
+        <input type="hidden" id="hiddenAmount" name="amount" />
+        <input type="hidden" id="hiddenTerm" name="term" />
+        <input type="hidden" id="hiddenBase" name="base" />
+        <input type="hidden" id="hiddenInterest" name="interest" />
+        <input type="hidden" id="hiddenTotal" name="total" />
 
-        <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
-        <p>Укажите дату выдачи паспорта</p>
-        <input type="date" name="passport_date" placeholder="Дата выдачи паспорта" required title="Дата выдачи паспорта" />
-        <input type="text" name="passport_issued_by" placeholder="Кем выдан паспорт (как в паспорте)" required />
-        <textarea name="registration_address" placeholder="Адрес прописки (как в паспорте)" rows="2" required></textarea>
+            <input type="text" name="lastname" placeholder="Фамилия" required />
+            <input type="text" name="firstname" placeholder="Имя" required />
+            <input type="text" name="middlename" placeholder="Отчество" required />
+            <input type="text" name="phone" placeholder="Телефон" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="text" name="city" placeholder="Город" />
 
-        <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
-        <textarea name="comment" rows="4" placeholder="Комментарий (необязательно, вы можите указать информацию которая поспособствует положительному результату)"></textarea>
-        <input type="hidden" name="amount" id="hiddenAmount">
-        <input type="hidden" name="term" id="hiddenTerm">
-        <input type="hidden" name="base" id="hiddenBase">
-        <input type="hidden" name="interest" id="hiddenInterest">
-        <input type="hidden" name="total" id="hiddenTotal">
-        <button type="submit">Отправить заявку</button>
+            <input type="text" name="passport" placeholder="Серия и номер паспорта" />
+            <p>Укажите дату выдачи паспорта:</p>
+            <input type="date" name="passport_date" placeholder="Дата выдачи" />
+            <input type="text" name="issued_by" placeholder="Кем выдан" />
+            <input type="text" name="registration_address" placeholder="Адрес прописки(как в паспорте)" />
+            <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" />
+            <textarea name="comment" placeholder="Комментарий"></textarea>
+            <button type="submit">Отправить</button>
+
     </form>
 </div>
 
@@ -253,11 +254,8 @@
     © 2025 ШансКредит · Контакты: shanscredit@mail.ru· +7 (900) 123-45-67
 </div>
 
-<script type="module">
-    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
 
-    emailjs.init('D7nNxNezkCjFSPTRP');
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
     emailjs.init("xFwYyiKcz3DVulVzm");
@@ -290,7 +288,7 @@
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         calculate();
-        emailjs.sendForm("service_ozen", "template_tzy51bm", form, "xFwYyiKcz3DVulVzm")
+        emailjs.sendForm("service_z3d6w05", "template_tzy51bm", form, "xFwYyiKcz3DVulVzm")
             .then(() => {
                 form.reset();
                 calculate();

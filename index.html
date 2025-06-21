@@ -211,6 +211,51 @@
 
 <div class="container" id="reviews">
     <h2>Отзывы клиентов</h2>
+    <!-- ───── 3 статических отзыва с полной Schema.org-разметкой ───── -->
+    <section itemscope itemtype="https://schema.org/Organization">
+
+
+        <!-- Анна -->
+        <div itemprop="review" itemscope itemtype="https://schema.org/Review">
+            <p>
+                <strong itemprop="author">Анна</strong> —
+                <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+        <meta itemprop="worstRating" content="1" />
+        <meta itemprop="bestRating"  content="5" />
+        <span itemprop="ratingValue">5</span> ⭐⭐⭐⭐⭐
+      </span>
+            </p>
+            <p itemprop="reviewBody">Очень довольна, всё быстро и удобно.</p>
+        </div>
+
+        <!-- Сергей -->
+        <div itemprop="review" itemscope itemtype="https://schema.org/Review">
+            <p>
+                <strong itemprop="author">Сергей</strong> —
+                <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+        <meta itemprop="worstRating" content="1" />
+        <meta itemprop="bestRating"  content="5" />
+        <span itemprop="ratingValue">4</span> ⭐⭐⭐⭐☆
+      </span>
+            </p>
+            <p itemprop="reviewBody">Оформил без проблем, спасибо.</p>
+        </div>
+
+        <!-- Наталья -->
+        <div itemprop="review" itemscope itemtype="https://schema.org/Review">
+            <p>
+                <strong itemprop="author">Наталья</strong> —
+                <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+        <meta itemprop="worstRating" content="1" />
+        <meta itemprop="bestRating"  content="5" />
+        <span itemprop="ratingValue">5</span> ⭐⭐⭐⭐⭐
+      </span>
+            </p>
+            <p itemprop="reviewBody">Получила деньги в тот же день!</p>
+        </div>
+    </section>
+    <!-- ─────────────────────────────────────────────────────────────── -->
+
     <div id="review-wrapper">
           <meta itemprop="name" content="ШансКредит">
           <meta itemprop="url" content="https://shans.vercel.app/">
@@ -435,7 +480,7 @@
             container.insertAdjacentHTML(
                 "beforeend",
                 `
-            <div itemprop="review" itemscope itemtype="https://schema.org/Review" style="margin-bottom:24px;">
+            <div class="review-item">
                 <p>
                     <strong itemprop="author">${name}</strong> —
                     <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">

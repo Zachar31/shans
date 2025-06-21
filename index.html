@@ -130,8 +130,13 @@
         <input type="tel" name="phone" placeholder="Телефон" required />
         <input type="email" name="email" placeholder="Email" required />
         <input type="text" name="city" placeholder="Город" required />
+
         <input type="text" name="passport" placeholder="Серия и номер паспорта" required />
+        <p>Укажите дату выдачи паспорта</p>
         <input type="date" name="passport_date" placeholder="Дата выдачи паспорта" required title="Дата выдачи паспорта" />
+        <input type="text" name="passport_issued_by" placeholder="Кем выдан паспорт (как в паспорте)" required />
+        <textarea name="registration_address" placeholder="Адрес прописки (как в паспорте)" rows="2" required></textarea>
+
         <input type="text" name="tax_id" placeholder="ИНН / Идентификационный код" required />
         <textarea name="comment" rows="4" placeholder="Комментарий (необязательно, вы можите указать информацию которая поспособствует положительному результату)"></textarea>
         <input type="hidden" name="amount" id="hiddenAmount">
@@ -248,7 +253,12 @@
     © 2025 ШансКредит · Контакты: shanscredit@mail.ru· +7 (900) 123-45-67
 </div>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="module">
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+
+    emailjs.init('D7nNxNezkCjFSPTRP');
+</script>
+
 <script>
     emailjs.init("xFwYyiKcz3DVulVzm");
 
@@ -280,7 +290,7 @@
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         calculate();
-        emailjs.sendForm("service_ozen", "template_tzy51bm", form)
+        emailjs.sendForm("service_ozen", "template_tzy51bm", form, "xFwYyiKcz3DVulVzm")
             .then(() => {
                 form.reset();
                 calculate();
@@ -291,6 +301,7 @@
                 alert("Ошибка при отправке заявки. Попробуйте позже.");
             });
     });
+
 </script>
 
 <script>

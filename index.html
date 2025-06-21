@@ -33,6 +33,65 @@
             }
         }
     </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "ШансКредит",
+            "url": "https://shans.vercel.app",
+            "logo": "https://cdn-icons-png.flaticon.com/512/6942/6942962.png",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "30"
+            },
+            "review": [
+                {
+                    "@type": "Review",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Анна"
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
+                    "reviewBody": "Очень довольна, всё быстро и удобно."
+                },
+                {
+                    "@type": "Review",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Сергей"
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "4",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
+                    "reviewBody": "Оформил без проблем, спасибо."
+                },
+                {
+                    "@type": "Review",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Наталья"
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
+                    "reviewBody": "Получила деньги в тот же день!"
+                }
+            ]
+        }
+    </script>
+
 
 
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6942/6942962.png" type="image/png">
@@ -152,7 +211,7 @@
 
 <div class="container" id="reviews">
     <h2>Отзывы клиентов</h2>
-    <div id="review-wrapper" itemscope itemtype="https://schema.org/Service">
+    <div id="review-wrapper">
           <meta itemprop="name" content="ШансКредит">
           <meta itemprop="url" content="https://shans.vercel.app/">
           <div id="review-list"></div>
